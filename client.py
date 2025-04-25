@@ -6,12 +6,12 @@ SERVER_PORT = 10001
 def print_menu():
     print("\nRobotic Tournament Team Score Management")
     print("Commands:")
-    print("  GET_SCHEDULE|team_name")
-    print("  GET_RANK|team_name")
-    print("  GET_RANKINGS")
-    print("  SUBMIT_SCORE|game_id|score")
-    print("  HELP")
-    print("  EXIT")
+    print("  get_schedule|team_name")
+    print("  get_rank|team_name")
+    print("  get_rankings")
+    print("  submit_score|game_id|score")
+    print("  help")
+    print("  exit")
 
 def main():
     clientSocket = socket(AF_INET, SOCK_STREAM)
@@ -29,7 +29,7 @@ def main():
             print("Error:", resp[4:].strip())
         elif resp.startswith("500|"):
             print("Server Error:", resp[4:].strip())
-        if cmd.upper() == "EXIT":
+        if cmd.strip().upper() == "EXIT":
             break
     clientSocket.close()
 
