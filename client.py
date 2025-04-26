@@ -6,6 +6,7 @@ SERVER_PORT = 10001
 def print_menu():
     print("\nRobotic Tournament Team Score Management")
     print("Commands:")
+    print("  get_schedule_all")
     print("  get_schedule|team_name")
     print("  get_rank|team_name")
     print("  get_rankings")

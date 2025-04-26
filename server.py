@@ -117,10 +117,19 @@ def handle_client(conn):
                 recalc_averages(data)
                 save_data(data)
                 conn.send(b"200|Score submitted and rankings updated\n")
+            elif cmd == "GET_SCHEDULE_ALL":
+                schedule = []
+                for game in data["games"]:
+                    teams = ", ".join(game["teams"])
+                    score = game["score"] if game["score"] is not None else "Pending"
+                    schedule.append(f"Game {game['id']}: {teams} | Score: {score}")
+                msg = "200|Full Schedule:\n" + "\n".join(schedule) + "\n"
+                conn.send(msg.encode())
             elif cmd == "HELP":
                 helpmsg = (
                     "200|Commands:\n"
                     "get_schedule|team_name\n"
+                    "get_schedule_all\n"
                     "get_rank|team_name\n"
                     "get_rankings\n"
                     "submit_score|game_id|score\n"
